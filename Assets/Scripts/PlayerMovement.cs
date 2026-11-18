@@ -4,14 +4,14 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;
-
+    PlayerStats stats;
     Rigidbody2D rb;
     InputAction move;
     Vector2 input;
 
     void Awake()
     {
+        stats = GetComponent<PlayerStats>();
         rb = GetComponent<Rigidbody2D>();
 
         move = new InputAction("Move", InputActionType.Value);
@@ -39,6 +39,6 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = input * speed;
+        rb.linearVelocity = input * stats.moveSpeed;
     }
 }
