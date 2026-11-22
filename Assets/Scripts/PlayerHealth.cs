@@ -36,6 +36,20 @@ public class PlayerHealth : MonoBehaviour
         else if (sr != null) StartCoroutine(Flash());
     }
 
+    public void AddMaxHealth(float amount)
+    {
+        if (amount <= 0f) return;
+        Current = Mathf.Min(Current + amount, MaxHealth);
+        onHealthChanged?.Invoke(Current, MaxHealth);
+    }
+
+    public void Heal(float amount)
+    {
+        if (amount <= 0f) return;
+        Current = Mathf.Min(Current + amount, MaxHealth);
+        onHealthChanged?.Invoke(Current, MaxHealth);
+    }
+
     IEnumerator Flash()
     {
         sr.color = Color.red;

@@ -66,14 +66,18 @@ public class GameUI : MonoBehaviour
         if (gm.Level != lastLevel) { lastLevel = gm.Level; levelText.text = "Lv." + gm.Level; }
     }
 
-    // Gün 3-də XP sistemi bunu çağıracaq (0..1)
     public void SetXP(float fraction)
     {
         xpFill.anchorMax = new Vector2(Mathf.Clamp01(fraction), 1f);
     }
 
     // Düymələrin OnClick-ləri bunlara bağlanır
-    public void Pause() { GameManager.Instance.SetPaused(true); }
+    public void Pause()
+    {
+        if (LevelUpUI.IsOpen) return;
+        GameManager.Instance.SetPaused(true);
+    }
+
     public void Resume() { GameManager.Instance.SetPaused(false); }
     public void Restart() { GameManager.Instance.Restart(); }
     public void OpenRecord() { pauseRecord.Refresh(); recordPanel.SetActive(true); }
@@ -82,6 +86,7 @@ public class GameUI : MonoBehaviour
 
     public void OpenInfo()
     {
+        if (LevelUpUI.IsOpen) return;
         infoLevel.text = "Character Level : " + GameManager.Instance.Level;
         infoStats.Refresh();
         infoPanel.SetActive(true);
@@ -104,6 +109,11 @@ public class GameUI : MonoBehaviour
     void ShowGameOver()
     {
         var gm = GameManager.Instance;
+        if (LevelUpUI.IsOpen)
+        {
+            var lvlUI = FindFirstObjectByType<LevelUpUI>(FindObjectsInactive.Include);
+            if (lvlUI != null) lvlUI.Hide();
+        }
         pausePanel.SetActive(false);
         recordPanel.SetActive(false);
         overTime.text = FormatTime(gm.ElapsedTime);
