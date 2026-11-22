@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         Time.timeScale = 1f;
         DamageTracker.Reset();
+        Enemy.ClearAll();
     }
 
     void Update()

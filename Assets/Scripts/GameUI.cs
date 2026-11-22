@@ -45,10 +45,12 @@ public class GameUI : MonoBehaviour
         var gm = GameManager.Instance;
         gm.onPauseChanged += OnPauseChanged;
         gm.onGameOver += ShowGameOver;
+        if (XPManager.Instance != null) XPManager.Instance.onXPChanged += SetXP;
     }
 
     void OnDestroy()
     {
+        if (XPManager.Instance != null) XPManager.Instance.onXPChanged -= SetXP;
         var gm = GameManager.Instance;
         if (gm == null) return;
         gm.onPauseChanged -= OnPauseChanged;

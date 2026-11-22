@@ -4540,6 +4540,54 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -6}
   m_SizeDelta: {x: 400, y: 52}
   m_Pivot: {x: 1, y: 1}
+--- !u!1 &605322306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 605322308}
+  - component: {fileID: 605322307}
+  m_Layer: 0
+  m_Name: XPManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &605322307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605322306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c253db37be68734d9960bc418fe6a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::XPManager
+  player: {fileID: 1530414024}
+  gemPrefab: {fileID: 973102813899765652, guid: 845395b5e9bc5e64e98cd813e32f686c, type: 3}
+  baseXP: 5
+  xpPerLevel: 4
+--- !u!4 &605322308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605322306}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &606149543
 GameObject:
   m_ObjectHideFlags: 0
@@ -12201,6 +12249,7 @@ GameObject:
   - component: {fileID: 1530414025}
   - component: {fileID: 1530414027}
   - component: {fileID: 1530414026}
+  - component: {fileID: 1530414028}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -12403,6 +12452,23 @@ MonoBehaviour:
   damageReduction: 0
   cooldownReduction: 0
   attackMultiplier: 1
+--- !u!114 &1530414028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530414019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5376a09104f485c4f86f7ec0c2eb42ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StarshotSpell
+  data: {fileID: 11400000, guid: 0cb865461deadba4b987c75bade497a7, type: 2}
+  level: 1
+  projectilePrefab: {fileID: 314520720242571560, guid: f54bb2d84134cb04a8e74102567353dd, type: 3}
+  targetRange: 11
+  spreadAngle: 10
 --- !u!1 &1543733511
 GameObject:
   m_ObjectHideFlags: 0
@@ -16225,3 +16291,4 @@ SceneRoots:
   - {fileID: 347635359}
   - {fileID: 1026760760}
   - {fileID: 218119751}
+  - {fileID: 605322308}
