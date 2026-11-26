@@ -15,17 +15,23 @@ public class StarshotSpell : Spell
     public bool leadMovingTargets = true;
     public float closeRangeDirectAim = 1.8f;
 
+    readonly Stack<Projectile> projectilePool = new Stack<Projectile>(32);
+    readonly HashSet<Enemy> targetedThisBurst = new HashSet<Enemy>();
+    WaitForSeconds cachedWaitGap;
+    float cachedGapDuration = -1f;
+
     bool isFiring;
     float nextAllowedFireTime;
 
     void OnDisable()
     {
+        StopAllCoroutines();
         isFiring = false;
     }
 
     protected override bool TryFire()
     {
-        if (isFiring) return false;
+        if (isFiring || projectilePrefab == null) return false;
         if (IsEvolved && Time.time < nextAllowedFireTime) return false;
 
         Vector2 origin = transform.position;
@@ -42,7 +48,8 @@ public class StarshotSpell : Spell
 
         int count = Mathf.Max(1, s.count);
         float gap = IsEvolved ? evoBurstInterval : burstInterval;
-        var targetedThisBurst = new HashSet<Enemy>();
+        WaitForSeconds waitGap = GetWaitForSeconds(gap);
+        targetedThisBurst.Clear();
 
         for (int i = 0; i < count; i++)
         {
@@ -55,15 +62,19 @@ public class StarshotSpell : Spell
             targetedThisBurst.Add(target);
             Vector2 dir = CalculateAimDirection(origin, target, s.speed);
 
-            var go = Instantiate(projectilePrefab, origin, Quaternion.identity);
-            var proj = go.GetComponent<Projectile>();
-            proj.Launch(dir, s.speed, dmg, s.pierce, s.duration, data.id, s.size);
-
-            if (i < count - 1 && gap > 0f)
+            Projectile proj = GetProjectile(origin);
+            if (proj != null)
             {
-                yield return new WaitForSeconds(gap);
+                proj.Launch(dir, s.speed, dmg, s.pierce, s.duration, SpellId, s.size, this);
+            }
+
+            if (i < count - 1 && waitGap != null)
+            {
+                yield return waitGap;
             }
         }
+
+        targetedThisBurst.Clear();
 
         if (IsEvolved)
         {
@@ -73,24 +84,53 @@ public class StarshotSpell : Spell
         isFiring = false;
     }
 
+    WaitForSeconds GetWaitForSeconds(float seconds)
+    {
+        if (seconds <= 0f) return null;
+        if (cachedWaitGap == null || !Mathf.Approximately(cachedGapDuration, seconds))
+        {
+            cachedGapDuration = seconds;
+            cachedWaitGap = new WaitForSeconds(seconds);
+        }
+        return cachedWaitGap;
+    }
+
+    Projectile GetProjectile(Vector2 origin)
+    {
+        while (projectilePool.Count > 0)
+        {
+            Projectile pooled = projectilePool.Pop();
+            if (pooled == null) continue;
+            pooled.transform.SetPositionAndRotation(origin, Quaternion.identity);
+            pooled.gameObject.SetActive(true);
+            return pooled;
+        }
+
+        var go = Instantiate(projectilePrefab, origin, Quaternion.identity);
+        return go.GetComponent<Projectile>();
+    }
+
+    public void ReturnProjectile(Projectile proj)
+    {
+        if (proj == null) return;
+        proj.gameObject.SetActive(false);
+        projectilePool.Push(proj);
+    }
+
     Vector2 CalculateAimDirection(Vector2 origin, Enemy target, float projectileSpeed)
     {
-        Vector2 targetPos = target.transform.position;
+        Vector2 targetPos = target.Position;
         Vector2 toTarget = targetPos - origin;
         float dist = toTarget.magnitude;
 
         if (leadMovingTargets && dist > closeRangeDirectAim && projectileSpeed > 0.1f)
         {
-            var enemyRb = target.GetComponent<Rigidbody2D>();
-            if (enemyRb != null)
+            float flightTime = Mathf.Clamp(dist / projectileSpeed, 0f, 0.35f);
+            Vector2 predictedPos = targetPos + target.Velocity * flightTime;
+            Vector2 toPredicted = predictedPos - origin;
+            if (toPredicted.sqrMagnitude > 0.0001f)
             {
-                float flightTime = Mathf.Clamp(dist / projectileSpeed, 0f, 0.35f);
-                Vector2 predictedPos = targetPos + enemyRb.linearVelocity * flightTime;
-                Vector2 toPredicted = predictedPos - origin;
-                if (toPredicted.sqrMagnitude > 0.0001f)
-                {
-                    return toPredicted.normalized;
-                }
+                return toPredicted.normalized;
             }
         }
 

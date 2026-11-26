@@ -859,7 +859,7 @@ GameObject:
   - component: {fileID: 70359199}
   - component: {fileID: 70359200}
   - component: {fileID: 70359201}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1580,7 +1580,7 @@ GameObject:
   - component: {fileID: 143008963}
   - component: {fileID: 143008961}
   - component: {fileID: 143008962}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Card_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1990,7 +1990,6 @@ GameObject:
   - component: {fileID: 152410014}
   - component: {fileID: 152410013}
   - component: {fileID: 152410012}
-  - component: {fileID: 152410016}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2075,7 +2074,6 @@ RectTransform:
   m_Children:
   - {fileID: 2125773506}
   - {fileID: 60166303}
-  - {fileID: 469878463}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2083,18 +2081,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &152410016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 152410011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c32084771f86e4cab92b2942d2ea93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HUD
 --- !u!1 &158396754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,7 +2092,7 @@ GameObject:
   - component: {fileID: 158396755}
   - component: {fileID: 158396756}
   - component: {fileID: 158396757}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LevelTag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2614,6 +2600,7 @@ RectTransform:
   - {fileID: 1604933626}
   - {fileID: 197097994}
   - {fileID: 1618361849}
+  - {fileID: 469878463}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3371,8 +3358,8 @@ MonoBehaviour:
   reductionPerLevel: 0.1
   cooldownPerLevel: 0.1
   maxPoolHealAmount: 25
-  resumeHoldDuration: 1
-  resumeRampDuration: 1.5
+  resumeFreezeDuration: 1
+  freezeEdgeColor: {r: 0.55, g: 0.88, b: 1, a: 0.75}
 --- !u!1 &355656977
 GameObject:
   m_ObjectHideFlags: 0
@@ -3517,7 +3504,7 @@ GameObject:
   - component: {fileID: 383831929}
   - component: {fileID: 383831931}
   - component: {fileID: 383831930}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IconFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3668,7 +3655,7 @@ GameObject:
   - component: {fileID: 403546585}
   - component: {fileID: 403546587}
   - component: {fileID: 403546586}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EvolutionBadge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3744,7 +3731,7 @@ GameObject:
   - component: {fileID: 412370778}
   - component: {fileID: 412370779}
   - component: {fileID: 412370780}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3887,7 +3874,7 @@ GameObject:
   - component: {fileID: 423011395}
   - component: {fileID: 423011397}
   - component: {fileID: 423011396}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IconFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4177,7 +4164,7 @@ GameObject:
   - component: {fileID: 469878465}
   - component: {fileID: 469878464}
   - component: {fileID: 469878462}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LevelUpPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4261,7 +4248,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 680273158}
-  m_Father: {fileID: 152410015}
+  m_Father: {fileID: 218119751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5417,7 +5404,7 @@ GameObject:
   - component: {fileID: 586263598}
   - component: {fileID: 586263599}
   - component: {fileID: 586263600}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LevelTag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5574,8 +5561,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::XPManager
   player: {fileID: 1530414024}
   gemPrefab: {fileID: 973102813899765652, guid: 845395b5e9bc5e64e98cd813e32f686c, type: 3}
-  baseXP: 5
-  xpPerLevel: 4
+  baseXP: 6
+  xpPerLevel: 6
+  maxActiveGems: 220
+  globalMagnetEveryNLevels: 5
 --- !u!4 &605322308
 Transform:
   m_ObjectHideFlags: 0
@@ -6442,7 +6431,7 @@ GameObject:
   - component: {fileID: 680081647}
   - component: {fileID: 680081648}
   - component: {fileID: 680081649}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LevelTag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6578,7 +6567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 680273158}
   - component: {fileID: 680273159}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7019,6 +7008,7 @@ RectTransform:
   - {fileID: 781737756}
   - {fileID: 1140446268}
   - {fileID: 1021990159}
+  - {fileID: 889174335}
   m_Father: {fileID: 218119751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8074,7 +8064,7 @@ GameObject:
   - component: {fileID: 833672342}
   - component: {fileID: 833672344}
   - component: {fileID: 833672343}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SubHeaderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8348,7 +8338,7 @@ GameObject:
   - component: {fileID: 840045356}
   - component: {fileID: 840045358}
   - component: {fileID: 840045357}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EvoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8943,6 +8933,157 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &889174334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 889174335}
+  - component: {fileID: 889174338}
+  - component: {fileID: 889174337}
+  - component: {fileID: 889174336}
+  m_Layer: 5
+  m_Name: FpsText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &889174335
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889174334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 707077686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 24, y: 24}
+  m_SizeDelta: {x: 220, y: 44}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &889174336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889174334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff376005424efb54884b6a228d4fb710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FpsCounter
+  updateInterval: 0.5
+--- !u!114 &889174337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889174334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: FPS 60
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 63834b57f1d22ef47a60e651ae0fbd85, type: 2}
+  m_sharedMaterial: {fileID: 5240551179627133493, guid: 63834b57f1d22ef47a60e651ae0fbd85, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 0.75, g: 1, b: 0.75, a: 0.85}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 30
+  m_fontSizeBase: 30
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 1024
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &889174338
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889174334}
+  m_CullTransparentMesh: 1
 --- !u!1 &903546639
 GameObject:
   m_ObjectHideFlags: 0
@@ -9104,7 +9245,7 @@ GameObject:
   - component: {fileID: 915011195}
   - component: {fileID: 915011196}
   - component: {fileID: 915011197}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9177,7 +9318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 923265361}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9215,7 +9356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 932517191}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9405,7 +9546,7 @@ GameObject:
   - component: {fileID: 964028291}
   - component: {fileID: 964028292}
   - component: {fileID: 964028293}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9480,7 +9621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 974550781}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9798,7 +9939,7 @@ GameObject:
   - component: {fileID: 1002058551}
   - component: {fileID: 1002058552}
   - component: {fileID: 1002058553}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10166,17 +10307,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   player: {fileID: 1530414024}
   entries:
-  - prefab: {fileID: 4328799472076555386, guid: 6f260734cb916884181e0c2675cdef96, type: 3}
+  - prefab: {fileID: 9144295730057149962, guid: f8017ef83e1e60e4dbdd363c64777f96, type: 3}
     unlockTime: 0
-  - prefab: {fileID: 4328799472076555386, guid: be35684d5e8349f4d894dda8adafea1e, type: 3}
-    unlockTime: 30
-  spawnDistance: 12.5
-  startInterval: 1.2
-  minInterval: 0.3
-  intervalDecayPerMinute: 0.4
-  maxAlive: 150
-  hpGrowthPerMinute: 0.3
-  damageGrowthPerMinute: 0.15
+    maxTime: -1
+    weight: 58
+    lateWeight: -1
+    lateWeightTime: 360
+    includeInSwarmRush: 1
+  - prefab: {fileID: 4881904233412051704, guid: ab7fb16547516fa48ba4d23e93a0ed1b, type: 3}
+    unlockTime: 0
+    maxTime: -1
+    weight: 42
+    lateWeight: -1
+    lateWeightTime: 360
+    includeInSwarmRush: 0
+  - prefab: {fileID: 8911179773579911295, guid: eb191826fa0230841b21a5c27939e8cb, type: 3}
+    unlockTime: 75
+    maxTime: -1
+    weight: 22
+    lateWeight: 30
+    lateWeightTime: 240
+    includeInSwarmRush: 1
+  - prefab: {fileID: 7065621246025184963, guid: 247df46d36e63e54e8569b14203a75f7, type: 3}
+    unlockTime: 180
+    maxTime: -1
+    weight: 8
+    lateWeight: 16
+    lateWeightTime: 360
+    includeInSwarmRush: 0
+  spawnDistance: 13.8
+  startInterval: 1
+  minInterval: 0.22
+  intervalDecayPerMinute: 0.085
+  maxAlive: 110
+  hpGraceSeconds: 45
+  hpGrowthPerMinute: 0.22
+  hpQuadraticGrowth: 0.11
+  damageGrowthPerMinute: 0.12
+  swarmRushInterval: 120
+  swarmRushDuration: 9
+  swarmRushBurstInterval: 0.35
+  swarmRushCountPerBurst: 2
 --- !u!4 &1026760760
 Transform:
   m_ObjectHideFlags: 0
@@ -10379,7 +10550,7 @@ GameObject:
   - component: {fileID: 1054051938}
   - component: {fileID: 1054051939}
   - component: {fileID: 1054051940}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10651,7 +10822,7 @@ GameObject:
   - component: {fileID: 1064985159}
   - component: {fileID: 1064985160}
   - component: {fileID: 1064985161}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10938,7 +11109,7 @@ GameObject:
   - component: {fileID: 1110733424}
   - component: {fileID: 1110733423}
   - component: {fileID: 1110733422}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EvolutionBadge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11093,7 +11264,7 @@ GameObject:
   - component: {fileID: 1127679237}
   - component: {fileID: 1127679238}
   - component: {fileID: 1127679239}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11230,7 +11401,7 @@ GameObject:
   - component: {fileID: 1129863335}
   - component: {fileID: 1129863336}
   - component: {fileID: 1129863337}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13000,7 +13171,7 @@ GameObject:
   - component: {fileID: 1357761605}
   - component: {fileID: 1357761607}
   - component: {fileID: 1357761606}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EvolutionBadge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14712,6 +14883,9 @@ GameObject:
   - component: {fileID: 1530414027}
   - component: {fileID: 1530414026}
   - component: {fileID: 1530414028}
+  - component: {fileID: 1530414031}
+  - component: {fileID: 1530414030}
+  - component: {fileID: 1530414029}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -14820,7 +14994,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14908,9 +15082,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e886c3c0bf32240acdf61579dbb952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  moveSpeed: 3
+  moveSpeed: 4.4
   maxHealth: 100
-  pickupRange: 1.5
+  pickupRange: 2.6
   damageReduction: 0
   cooldownReduction: 0
   attackMultiplier: 1
@@ -14935,6 +15109,100 @@ MonoBehaviour:
   evoBurstInterval: 0.06
   evoMinCycleTime: 0.22
   leadMovingTargets: 1
+  closeRangeDirectAim: 1.8
+--- !u!114 &1530414029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530414019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f73121ed455e36c438b2a865dd6a0d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SupernovaSpell
+  data: {fileID: 11400000, guid: 524b65055f7c264458f8e20ac08f11ac, type: 2}
+  level: 0
+  fitToScreen: 1
+  screenCoverage: 0.72
+  fallbackRadius: 5
+  requireEnemyInRange: 1
+  followPlayerWhileExpanding: 1
+  expandDuration: 1.35
+  fadeDuration: 0.65
+  fillSortingOrder: 1
+  rimSortingOrder: 11
+  evoZoneDuration: 4.5
+  evoTickInterval: 0.35
+  evoTickDamageRatio: 0.22
+  evoFlameSpawnInterval: 0.022
+  evoFlamesPerBurst: 3
+  fillColor: {r: 0.95, g: 0.98, b: 1, a: 0.58}
+  rimColor: {r: 1, g: 1, b: 1, a: 0.98}
+  coreFlashColor: {r: 1, g: 0.96, b: 0.78, a: 0.95}
+  sparkColor: {r: 1, g: 0.78, b: 0.3, a: 1}
+  tinyFlameColor: {r: 1, g: 0.98, b: 0.92, a: 0.95}
+  blastKnockback: 2.4
+  customFillSprite: {fileID: 0}
+  customRimSprite: {fileID: 0}
+  customBlastPrefab: {fileID: 0}
+--- !u!114 &1530414030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530414019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84dd3fb109464af4eac1c50ba6afed77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PulsarSpell
+  data: {fileID: 11400000, guid: 614be56a3f93c4740b80be11a9d79cae, type: 2}
+  level: 0
+  beamLength: 14
+  baseBeamWidth: 0.85
+  telegraphDuration: 0.1
+  defaultBeamDuration: 0.32
+  volleyStagger: 0.022
+  minAngleGap: 6
+  beamKnockback: 1.2
+  beamColor: {r: 0.62, g: 0.48, b: 1, a: 0.95}
+  evoBeamColor: {r: 0.95, g: 0.45, b: 1, a: 0.95}
+  beamPrefab: {fileID: 0}
+  customBeamSprite: {fileID: 0}
+--- !u!114 &1530414031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530414019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b0b01698e64e0439d8e879f8f5f175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoonletsSpell
+  data: {fileID: 11400000, guid: a66451d7e50670f4e8d0ab1ee7bb13ba, type: 2}
+  level: 0
+  baseOrbitRadius: 2.2
+  baseOrbRadius: 0.38
+  baseAngularSpeed: 155
+  enemyHitCooldown: 0.32
+  hitKnockback: 0.85
+  evoInnerRadius: 1.65
+  evoOuterRadius: 3.05
+  evoOrbSizeMultiplier: 0.65
+  evoInnerSpeedMultiplier: 1.2
+  evoOuterSpeedMultiplier: 0.95
+  orbColor: {r: 0.55, g: 0.9, b: 1, a: 1}
+  evoInnerColor: {r: 1, g: 0.85, b: 0.35, a: 1}
+  evoOuterColor: {r: 0.65, g: 0.95, b: 1, a: 1}
+  trailInterval: 0.06
+  orbPrefab: {fileID: 0}
+  evoOrbPrefab: {fileID: 0}
+  customOrbSprite: {fileID: 0}
 --- !u!1 &1543733511
 GameObject:
   m_ObjectHideFlags: 0
@@ -15220,7 +15488,7 @@ GameObject:
   - component: {fileID: 1563748536}
   - component: {fileID: 1563748538}
   - component: {fileID: 1563748537}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: HeaderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15532,7 +15800,7 @@ GameObject:
   - component: {fileID: 1590108176}
   - component: {fileID: 1590108177}
   - component: {fileID: 1590108178}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15669,7 +15937,7 @@ GameObject:
   - component: {fileID: 1591042832}
   - component: {fileID: 1591042834}
   - component: {fileID: 1591042833}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IconFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16248,7 +16516,7 @@ GameObject:
   - component: {fileID: 1649581382}
   - component: {fileID: 1649581383}
   - component: {fileID: 1649581384}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17393,7 +17661,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17421,7 +17689,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 40.96, y: 40.96}
+  m_Size: {x: 20.48, y: 30.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -17453,7 +17721,7 @@ GameObject:
   - component: {fileID: 1777838398}
   - component: {fileID: 1777838396}
   - component: {fileID: 1777838397}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Card_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18150,7 +18418,7 @@ GameObject:
   - component: {fileID: 1917063792}
   - component: {fileID: 1917063790}
   - component: {fileID: 1917063791}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Card_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18271,7 +18539,7 @@ GameObject:
   - component: {fileID: 1937494428}
   - component: {fileID: 1937494429}
   - component: {fileID: 1937494430}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19087,7 +19355,7 @@ GameObject:
   - component: {fileID: 2090929915}
   - component: {fileID: 2090929917}
   - component: {fileID: 2090929916}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EvoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19374,7 +19642,7 @@ GameObject:
   - component: {fileID: 2104658797}
   - component: {fileID: 2104658799}
   - component: {fileID: 2104658798}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EvoText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

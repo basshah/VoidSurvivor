@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
         Time.timeScale = 1f;
         DamageTracker.Reset();
         Enemy.ClearAll();

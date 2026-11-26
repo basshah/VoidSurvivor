@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Starshot
   icon: {fileID: 0}
   description: 
-  minCooldown: 0.05
+  minCooldown: 0.12
   levels:
   - damage: 10
     cooldown: 1
@@ -62,7 +62,7 @@ MonoBehaviour:
     duration: 1.5
   evolution:
     damage: 28
-    cooldown: 0.1
+    cooldown: 0.18
     count: 2
     speed: 18
     size: 1.2

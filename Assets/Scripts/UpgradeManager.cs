@@ -286,7 +286,16 @@ public class UpgradeManager : MonoBehaviour
         if (freezeOverlay != null)
         {
             freezeOverlay.gameObject.SetActive(true);
-            freezeOverlay.transform.SetAsLastSibling();
+            if (levelUpUI != null && levelUpUI.transform.parent == freezeOverlay.transform.parent)
+            {
+                freezeOverlay.transform.SetAsLastSibling();
+                int levelUpIdx = levelUpUI.transform.GetSiblingIndex();
+                freezeOverlay.transform.SetSiblingIndex(levelUpIdx);
+            }
+            else
+            {
+                freezeOverlay.transform.SetAsLastSibling();
+            }
         }
 
         while (elapsed < duration)
@@ -323,10 +332,16 @@ public class UpgradeManager : MonoBehaviour
 
         Canvas canvas = levelUpUI != null
             ? levelUpUI.GetComponentInParent<Canvas>()
-            : FindFirstObjectByType<Canvas>();
+            : null;
+        if (canvas == null)
+        {
+            GameUI gameUI = FindFirstObjectByType<GameUI>(FindObjectsInactive.Include);
+            canvas = gameUI != null ? gameUI.GetComponentInParent<Canvas>() : FindFirstObjectByType<Canvas>();
+        }
         if (canvas == null) return;
 
         GameObject go = new GameObject("FreezeEdgeOverlay", typeof(RectTransform), typeof(RawImage));
+        go.layer = canvas.gameObject.layer;
         go.transform.SetParent(canvas.transform, false);
 
         RectTransform rt = go.GetComponent<RectTransform>();

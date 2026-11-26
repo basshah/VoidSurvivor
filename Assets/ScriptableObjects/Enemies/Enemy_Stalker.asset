@@ -10,10 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7070e7fd78cdd4d429252f86c94f75c9, type: 3}
-  m_Name: Enemy_Meteor
+  m_Name: Enemy_Stalker
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  displayName: Enemy_Meteor
-  maxHealth: 10
+  displayName: Stalker
+  maxHealth: 20
   moveSpeed: 1.8
   contactDamage: 8
-  xpValue: 1
+  xpValue: 2
+  visualType: 1
+  visualSize: 1.85
+  hitRadiusRatio: 0.39
+  knockbackResistance: 0.25
+  deathVfxColor: {r: 0.95, g: 0.25, b: 0.38, a: 1}
+  customSprite: {fileID: 0}
+  animatorController: {fileID: 0}

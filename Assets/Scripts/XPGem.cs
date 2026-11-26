@@ -4,33 +4,21 @@ public class XPGem : MonoBehaviour
 {
     public int value = 1;
     public float collectDistance = 0.4f;
+    public float globalPullSpeed = 16f;
 
-    float speed = 4f;
-    bool attracted;
+    [HideInInspector] public float speed = 4f;
+    [HideInInspector] public bool attracted;
+    [HideInInspector] public bool globalAttracted;
+    [HideInInspector] public Vector2 position;
+    [HideInInspector] public int activeIndex = -1;
 
-    void Update()
+    public void ResetForPool(Vector2 pos, int val)
     {
-        var m = XPManager.Instance;
-        if (m == null || m.player == null) return;
-
-        Vector2 to = (Vector2)m.player.position - (Vector2)transform.position;
-        float sqr = to.sqrMagnitude;
-
-        if (!attracted)
-        {
-            float r = m.PickupRange;
-            if (sqr > r * r) return;
-            attracted = true;
-        }
-
-        if (sqr <= collectDistance * collectDistance)
-        {
-            m.AddXP(value);
-            Destroy(gameObject);
-            return;
-        }
-
-        speed = Mathf.Min(speed + 40f * Time.deltaTime, 20f);
-        transform.position += (Vector3)(to.normalized * speed * Time.deltaTime);
+        position = pos;
+        transform.position = new Vector3(pos.x, pos.y, 0f);
+        value = val;
+        speed = 4f;
+        attracted = false;
+        globalAttracted = false;
     }
 }

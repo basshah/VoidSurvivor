@@ -1,153 +1,175 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
 {
     public bool destroyOffScreen = true;
     public float minHitRadius = 0.22f;
 
-    Rigidbody2D rb;
-    Collider2D col;
+    [Header("Combat Feel")]
+    public float knockbackForce = 1.1f;
+
+    [Header("Magic Bolt Visual")]
+    public bool useProceduralBolt = true;
+    public Color boltColor = Color.white;
+    public float dotSpacing = 0.48f;        // Arxadakı nöqtələr arası məsafə
+    public float dotSize = 0.24f;           // Nöqtələrin başlanğıc ölçüsü
+    public float dotLifetime = 0.26f;       // Nöqtələrin sönmə müddəti
+    public bool spawnMuzzleFlash = true;
+
+    static readonly List<Enemy> sharedHits = new List<Enemy>(32);
+
+    SpriteRenderer sr;
+    Vector3 baseScale = Vector3.one;
+    bool initialized;
+
+    StarshotSpell ownerSpell;
+    Vector2 velocity;
+    float hitRadius;
     float damage;
     int hitsLeft;
     float lifeLeft;
     string spellId;
     bool consumed;
-    Vector2 lastPos;
+    Vector2 lastDotPos;
+    float currentSize = 1f;
 
     readonly HashSet<Enemy> hitEnemies = new HashSet<Enemy>();
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
-        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        EnsureInit();
+    }
+
+    void EnsureInit()
+    {
+        if (initialized) return;
+        initialized = true;
+        baseScale = transform.localScale;
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void Launch(Vector2 dir, float speed, float damage, int pierce,
-                       float lifetime, string spellId, float size)
+                       float lifetime, string spellId, float size, StarshotSpell owner = null)
     {
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody2D>();
-            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        }
-        if (col == null) col = GetComponent<Collider2D>();
+        EnsureInit();
 
         Vector2 direction = dir.sqrMagnitude > 0.0001f ? dir.normalized : Vector2.right;
 
+        ownerSpell = owner;
         this.damage = damage;
         hitsLeft = Mathf.Max(1, pierce + 1);
         lifeLeft = lifetime;
         this.spellId = spellId;
+        currentSize = Mathf.Max(0.2f, size);
         consumed = false;
         hitEnemies.Clear();
 
-        transform.localScale *= size;
+        if (useProceduralBolt && sr != null)
+        {
+            sr.sprite = SimpleVFX.GetBoltSprite();
+            sr.color = boltColor;
+            Material defaultMat = SimpleVFX.GetDefaultSpriteMaterial();
+            if (defaultMat != null) sr.sharedMaterial = defaultMat;
+            transform.localScale = Vector3.one * currentSize;
+        }
+        else
+        {
+            transform.localScale = baseScale * currentSize;
+        }
+
         transform.right = new Vector3(direction.x, direction.y, 0f);
-        rb.linearVelocity = direction * speed;
+        velocity = direction * speed;
 
-        lastPos = transform.position;
+        float maxScale = Mathf.Max(Mathf.Abs(transform.lossyScale.x), Mathf.Abs(transform.lossyScale.y));
+        hitRadius = Mathf.Max(minHitRadius, 0.1f * maxScale);
 
-        // Personajın dibində / güllənin yarandığı yerdə olan düşmənləri dərhal vur
-        CheckOverlapAt(lastPos);
+        Vector2 startPos = transform.position;
+        lastDotPos = startPos;
+
+        if (spawnMuzzleFlash)
+        {
+            SimpleVFX.SpawnMuzzleFlash(transform.position + (Vector3)(direction * 0.25f), boltColor, 0.5f * currentSize);
+        }
+
+        Enemy.QueryCircle(startPos, hitRadius, sharedHits);
+        for (int i = 0; i < sharedHits.Count; i++)
+        {
+            if (consumed) break;
+            TryHitEnemy(sharedHits[i]);
+        }
+        sharedHits.Clear();
     }
 
     void Update()
     {
         if (consumed) return;
 
-        lifeLeft -= Time.deltaTime;
-        if (lifeLeft <= 0f)
+        float dt = Time.deltaTime;
+        if (dt > 0f)
         {
-            Destroy(gameObject);
-            return;
-        }
+            Vector2 prevPos = transform.position;
+            Vector2 nextPos = prevPos + velocity * dt;
+            transform.position = new Vector3(nextPos.x, nextPos.y, 0f);
 
-        if (destroyOffScreen && !Enemy.IsOnScreen(transform.position, Camera.main, -0.02f))
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (consumed) return;
-
-        Vector2 currentPos = rb.position;
-        Vector2 delta = currentPos - lastPos;
-        float dist = delta.magnitude;
-
-        if (dist > 0.0001f)
-        {
-            float radius = GetHitRadius();
-            RaycastHit2D[] hits = Physics2D.CircleCastAll(lastPos, radius, delta / dist, dist);
-            if (hits.Length > 1)
-            {
-                Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
-            }
-
-            for (int i = 0; i < hits.Length; i++)
+            Enemy.QuerySegmentFirstOrAll(prevPos, nextPos, hitRadius, sharedHits);
+            for (int i = 0; i < sharedHits.Count; i++)
             {
                 if (consumed) break;
-                TryHitCollider(hits[i].collider);
+                TryHitEnemy(sharedHits[i]);
+            }
+            sharedHits.Clear();
+
+            if (consumed) return;
+
+            if (dotSpacing > 0.05f && (nextPos - lastDotPos).sqrMagnitude >= dotSpacing * dotSpacing)
+            {
+                Vector2 backOffset = -(Vector2)transform.right * (0.2f * currentSize);
+                SimpleVFX.SpawnBoltDot(nextPos + backOffset, boltColor, dotSize * currentSize, dotLifetime);
+                lastDotPos = nextPos;
+            }
+
+            lifeLeft -= dt;
+            if (lifeLeft <= 0f)
+            {
+                Despawn();
+                return;
             }
         }
-        else
+
+        if (destroyOffScreen && !Enemy.IsOnScreen(transform.position, Enemy.MainCamera, -0.02f))
         {
-            CheckOverlapAt(currentPos);
-        }
-
-        lastPos = currentPos;
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (consumed) return;
-        TryHitCollider(other);
-    }
-
-    void CheckOverlapAt(Vector2 point)
-    {
-        Collider2D[] overlaps = Physics2D.OverlapCircleAll(point, GetHitRadius());
-        for (int i = 0; i < overlaps.Length; i++)
-        {
-            if (consumed) break;
-            TryHitCollider(overlaps[i]);
+            Despawn();
         }
     }
 
-    void TryHitCollider(Collider2D other)
+    void TryHitEnemy(Enemy e)
     {
-        if (consumed || other == null) return;
-
-        var e = other.GetComponentInParent<Enemy>();
-        if (e == null || e.IsDead || hitEnemies.Contains(e)) return;
+        if (consumed || e == null || e.IsDead || hitEnemies.Contains(e)) return;
 
         hitEnemies.Add(e);
+        SimpleVFX.SpawnHit(transform.position, boltColor);
+        e.ApplyKnockback(velocity, knockbackForce);
         e.TakeDamage(damage, spellId);
         hitsLeft--;
 
         if (hitsLeft <= 0)
         {
-            consumed = true;
-            Destroy(gameObject);
+            Despawn();
         }
     }
 
-    float GetHitRadius()
+    void Despawn()
     {
-        if (col is CircleCollider2D circle)
+        if (consumed) return;
+        consumed = true;
+        if (ownerSpell != null)
         {
-            float scale = Mathf.Max(Mathf.Abs(transform.lossyScale.x), Mathf.Abs(transform.lossyScale.y));
-            return Mathf.Max(minHitRadius, circle.radius * scale);
+            ownerSpell.ReturnProjectile(this);
         }
-        if (col != null)
+        else
         {
-            return Mathf.Max(minHitRadius, Mathf.Max(col.bounds.extents.x, col.bounds.extents.y));
+            Destroy(gameObject);
         }
-        return minHitRadius;
     }
 }

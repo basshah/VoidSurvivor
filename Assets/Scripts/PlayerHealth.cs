@@ -25,14 +25,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        if (GameManager.Instance.IsGameOver) return;
+        var gm = GameManager.Instance;
+        if (gm != null && gm.IsGameOver) return;
         if (Time.time - lastHitTime < invincibleTime) return;
         lastHitTime = Time.time;
 
         Current = Mathf.Max(0f, Current - amount * (1f - stats.damageReduction));
         onHealthChanged?.Invoke(Current, MaxHealth);
 
-        if (Current <= 0f) GameManager.Instance.GameOver();
+        if (Current <= 0f) gm?.GameOver();
         else if (sr != null) StartCoroutine(Flash());
     }
 

@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc104b6d1147b444a31d7ccc846e717, type: 3}
+  m_Name: Spell_Pulsar
+  m_EditorClassIdentifier: Assembly-CSharp::SpellData
+  id: pulsar
+  displayName: Pulsar
+  icon: {fileID: 0}
+  description: Fires rapid wide energy beams in random directions.
+  minCooldown: 0.3
+  levels:
+  - damage: 18
+    cooldown: 3.2
+    count: 2
+    speed: 1
+    size: 0.8
+    pierce: 0
+    duration: 0.16
+  - damage: 23
+    cooldown: 3
+    count: 2
+    speed: 1
+    size: 0.95
+    pierce: 0
+    duration: 0.16
+  - damage: 28
+    cooldown: 2.8
+    count: 4
+    speed: 1
+    size: 1.05
+    pierce: 0
+    duration: 0.16
+  - damage: 35
+    cooldown: 2.6
+    count: 4
+    speed: 1
+    size: 1.15
+    pierce: 0
+    duration: 0.17
+  - damage: 43
+    cooldown: 2.4
+    count: 6
+    speed: 1
+    size: 1.25
+    pierce: 0
+    duration: 0.17
+  - damage: 52
+    cooldown: 2.2
+    count: 6
+    speed: 1
+    size: 1.35
+    pierce: 0
+    duration: 0.18
+  evolution:
+    damage: 64
+    cooldown: 2
+    count: 8
+    speed: 1
+    size: 1.55
+    pierce: 0
+    duration: 0.19

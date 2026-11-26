@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7070e7fd78cdd4d429252f86c94f75c9, type: 3}
+  m_Name: Enemy_Juggernaut
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  displayName: Juggernaut
+  maxHealth: 260
+  moveSpeed: 1.25
+  contactDamage: 20
+  xpValue: 14
+  visualType: 3
+  visualSize: 2.85
+  hitRadiusRatio: 0.39
+  knockbackResistance: 0.85
+  deathVfxColor: {r: 0.85, g: 0.3, b: 1, a: 1}
+  customSprite: {fileID: 0}
+  animatorController: {fileID: 0}

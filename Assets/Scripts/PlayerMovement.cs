@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerStats))]
 public class PlayerMovement : MonoBehaviour
 {
     PlayerStats stats;
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnEnable() { move.Enable(); }
     void OnDisable() { move.Disable(); }
+    void OnDestroy() { move?.Dispose(); }
 
     void Update()
     {

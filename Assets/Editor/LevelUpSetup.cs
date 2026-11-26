@@ -16,10 +16,13 @@ public static class LevelUpSetup
     [MenuItem("VoidSurvivor/Setup Level-Up + Passives")]
     public static void SetupAll()
     {
-        Canvas canvas = Object.FindFirstObjectByType<Canvas>();
+        GameUI gameUI = Object.FindFirstObjectByType<GameUI>(FindObjectsInactive.Include);
+        Canvas canvas = gameUI != null
+            ? gameUI.GetComponentInParent<Canvas>()
+            : Object.FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
-            Debug.LogError("[LevelUpSetup] Səhnədə Canvas tapılmadı! Əvvəl UIBuilder işlət.");
+            Debug.LogError("[LevelUpSetup] Səhnədə GameUI_Canvas (və ya Canvas) tapılmadı! Əvvəl UIBuilder işlət.");
             return;
         }
 
@@ -29,11 +32,11 @@ public static class LevelUpSetup
             Debug.LogWarning("[LevelUpSetup] Resources/UIFont.asset tapılmadı, standart şrift işlənəcək.");
         }
 
-        // Köhnə LevelUpPanel varsa təmizlə
-        Transform existing = canvas.transform.Find("LevelUpPanel");
-        if (existing != null)
+        // Köhnə LevelUpPanel varsa təmizlə (hər hansı Canvas altında)
+        LevelUpUI oldPanel = Object.FindFirstObjectByType<LevelUpUI>(FindObjectsInactive.Include);
+        if (oldPanel != null)
         {
-            Object.DestroyImmediate(existing.gameObject);
+            Object.DestroyImmediate(oldPanel.gameObject);
         }
 
         // 1. LevelUpPanel (tam ekran tünd fon)
@@ -252,6 +255,8 @@ public static class LevelUpSetup
     private static GameObject CreateUIObject(string name, Transform parent)
     {
         GameObject go = new GameObject(name, typeof(RectTransform));
+        int uiLayer = LayerMask.NameToLayer("UI");
+        if (uiLayer >= 0) go.layer = uiLayer;
         go.transform.SetParent(parent, false);
         return go;
     }

@@ -33,6 +33,7 @@ public abstract class Spell : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale <= 0f) return;
         if (level <= 0 || data == null || stats == null) return;
         timer -= Time.deltaTime;
         if (timer > 0f) return;

@@ -43,8 +43,11 @@ public class GameUI : MonoBehaviour
         SetXP(0f);
 
         var gm = GameManager.Instance;
-        gm.onPauseChanged += OnPauseChanged;
-        gm.onGameOver += ShowGameOver;
+        if (gm != null)
+        {
+            gm.onPauseChanged += OnPauseChanged;
+            gm.onGameOver += ShowGameOver;
+        }
         if (XPManager.Instance != null) XPManager.Instance.onXPChanged += SetXP;
     }
 
@@ -60,6 +63,7 @@ public class GameUI : MonoBehaviour
     void Update()
     {
         var gm = GameManager.Instance;
+        if (gm == null) return;
         int sec = (int)gm.ElapsedTime;
         if (sec != lastSec) { lastSec = sec; timerText.text = FormatTime(gm.ElapsedTime); }
         if (gm.Kills != lastKills) { lastKills = gm.Kills; killText.text = gm.Kills.ToString(); }
@@ -74,19 +78,19 @@ public class GameUI : MonoBehaviour
     // Düymələrin OnClick-ləri bunlara bağlanır
     public void Pause()
     {
-        if (LevelUpUI.IsOpen) return;
+        if (LevelUpUI.IsOpen || GameManager.Instance == null) return;
         GameManager.Instance.SetPaused(true);
     }
 
-    public void Resume() { GameManager.Instance.SetPaused(false); }
-    public void Restart() { GameManager.Instance.Restart(); }
+    public void Resume() { if (GameManager.Instance != null) GameManager.Instance.SetPaused(false); }
+    public void Restart() { if (GameManager.Instance != null) GameManager.Instance.Restart(); }
     public void OpenRecord() { pauseRecord.Refresh(); recordPanel.SetActive(true); }
     public void CloseRecord() { recordPanel.SetActive(false); }
     public void CloseInfo() { infoPanel.SetActive(false); }
 
     public void OpenInfo()
     {
-        if (LevelUpUI.IsOpen) return;
+        if (LevelUpUI.IsOpen || GameManager.Instance == null) return;
         infoLevel.text = "Character Level : " + GameManager.Instance.Level;
         infoStats.Refresh();
         infoPanel.SetActive(true);
@@ -95,6 +99,7 @@ public class GameUI : MonoBehaviour
     void OnPauseChanged()
     {
         var gm = GameManager.Instance;
+        if (gm == null) return;
         pausePanel.SetActive(gm.IsPaused);
         if (gm.IsPaused)
         {
@@ -109,6 +114,7 @@ public class GameUI : MonoBehaviour
     void ShowGameOver()
     {
         var gm = GameManager.Instance;
+        if (gm == null) return;
         if (LevelUpUI.IsOpen)
         {
             var lvlUI = FindFirstObjectByType<LevelUpUI>(FindObjectsInactive.Include);

@@ -31,7 +31,7 @@ public static class GameplaySetup
             data = ScriptableObject.CreateInstance<SpellData>();
             data.id = "starshot";
             data.displayName = "Starshot";
-            data.minCooldown = 0.05f;
+            data.minCooldown = 0.12f;
             data.levels = new[]
             {
                 L(10f, 1.0f, 1, 14f, 1f, 0, 1.5f),
@@ -41,7 +41,7 @@ public static class GameplaySetup
                 L(24f, 0.7f, 3, 14f, 1f, 1, 1.5f),
                 L(30f, 0.6f, 3, 14f, 1f, 2, 1.5f),
             };
-            data.evolution = L(28f, 0.1f, 2, 18f, 1.2f, 3, 1.5f);
+            data.evolution = L(28f, 0.18f, 2, 18f, 1.2f, 3, 1.5f);
             AssetDatabase.CreateAsset(data, dataPath);
         }
 

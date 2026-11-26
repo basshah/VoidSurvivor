@@ -10,10 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7070e7fd78cdd4d429252f86c94f75c9, type: 3}
-  m_Name: Enemy_Larva
+  m_Name: Enemy_Swarmer
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  displayName: Enemy_Larva
-  maxHealth: 6
-  moveSpeed: 3
+  displayName: Swarmer
+  maxHealth: 10
+  moveSpeed: 2.25
   contactDamage: 5
   xpValue: 1
+  visualType: 0
+  visualSize: 1.45
+  hitRadiusRatio: 0.39
+  knockbackResistance: 0.05
+  deathVfxColor: {r: 1, g: 0.22, b: 0.32, a: 1}
+  customSprite: {fileID: 0}
+  animatorController: {fileID: 0}
