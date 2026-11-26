@@ -15,6 +15,13 @@ public class GameManager : MonoBehaviour
     public event Action onGameOver;
     public event Action onPauseChanged;
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void EnforceTargetFrameRate()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+    }
+
     void Awake()
     {
         Instance = this;
