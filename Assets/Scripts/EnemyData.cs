@@ -26,6 +26,7 @@ public class EnemyData : ScriptableObject
 
     [Header("Optional Custom Art (Future Swap)")]
     public Sprite customSprite;
+    public Sprite[] directionalSprites = new Sprite[8];
     public RuntimeAnimatorController animatorController;
 
     private void OnEnable()

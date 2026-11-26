@@ -58,6 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2793168694346108197}
   - component: {fileID: 4964428090906570832}
+  - component: {fileID: 7158891012773880490}
   m_Layer: 0
   m_Name: VisualRoot
   m_TagString: Untagged
@@ -75,7 +76,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.85, y: 1.85, z: 1.85}
+  m_LocalScale: {x: 1.7411765, y: 1.7411765, z: 1.7411765}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9155229252976503482}
@@ -129,13 +130,39 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 070ad865d6218ab4a854b7ac6294292c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.0625, y: 1.0625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &7158891012773880490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8780249780447755036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb6c1ace9d3d2d498ff30892810d110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalVisual
+  sprites:
+  - {fileID: 21300000, guid: 25c25dde3a6223142964fc00dae51c1a, type: 3}
+  - {fileID: 21300000, guid: 582653b101e24dd4eb98d205baace217, type: 3}
+  - {fileID: 21300000, guid: e97b94dcfc1151448ba1cbce31b8df81, type: 3}
+  - {fileID: 21300000, guid: 8612c556aae285c438e756d6b96e5d27, type: 3}
+  - {fileID: 21300000, guid: 4a92eb759eb36ab40af1b3ff583a2085, type: 3}
+  - {fileID: 21300000, guid: 3ff9eae233ab0d842b7139b218093f26, type: 3}
+  - {fileID: 21300000, guid: 070ad865d6218ab4a854b7ac6294292c, type: 3}
+  - {fileID: 21300000, guid: 7b78b73bb9898344894d7eeabb7fc471, type: 3}
+  enableHover: 1
+  hoverAmplitude: 0.055
+  hoverFrequency: 2.6
+  maxTiltDegrees: 7
+  tiltSpeed: 10

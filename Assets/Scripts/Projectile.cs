@@ -20,6 +20,7 @@ public class Projectile : MonoBehaviour
     static readonly List<Enemy> sharedHits = new List<Enemy>(32);
 
     SpriteRenderer sr;
+    Animator anim;
     Vector3 baseScale = Vector3.one;
     bool initialized;
 
@@ -47,6 +48,7 @@ public class Projectile : MonoBehaviour
         initialized = true;
         baseScale = transform.localScale;
         sr = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     public void Launch(Vector2 dir, float speed, float damage, int pierce,
@@ -72,10 +74,24 @@ public class Projectile : MonoBehaviour
             Material defaultMat = SimpleVFX.GetDefaultSpriteMaterial();
             if (defaultMat != null) sr.sharedMaterial = defaultMat;
             transform.localScale = Vector3.one * currentSize;
+            if (anim != null) anim.enabled = false;
         }
         else
         {
             transform.localScale = baseScale * currentSize;
+            if (anim != null)
+            {
+                if (anim.runtimeAnimatorController != null)
+                {
+                    anim.enabled = true;
+                    anim.Play(0, -1, 0f);
+                    anim.Update(0f);
+                }
+                else
+                {
+                    anim.enabled = false;
+                }
+            }
         }
 
         transform.right = new Vector3(direction.x, direction.y, 0f);

@@ -240,16 +240,7 @@ public static class LevelUpSetup
 
     private static Sprite FindExactSprite(string exactName)
     {
-        string[] guids = AssetDatabase.FindAssets(exactName + " t:Sprite", new[] { "Assets" });
-        foreach (string guid in guids)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            if (Path.GetFileNameWithoutExtension(path).Equals(exactName, System.StringComparison.OrdinalIgnoreCase))
-            {
-                return AssetDatabase.LoadAssetAtPath<Sprite>(path);
-            }
-        }
-        return null;
+        return ArtSetup.FindIconSprite(exactName);
     }
 
     private static GameObject CreateUIObject(string name, Transform parent)

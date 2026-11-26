@@ -294,7 +294,11 @@ public class Enemy : MonoBehaviour
                 }
             }
 
-            if (e.sr != null && Mathf.Abs(moveVel.x) > 0.05f)
+            if (e.directionalVisual != null)
+            {
+                e.directionalVisual.TickVisual(moveVel, stepDt);
+            }
+            else if (e.sr != null && Mathf.Abs(moveVel.x) > 0.05f)
             {
                 e.sr.flipX = moveVel.x < 0f;
             }
@@ -397,6 +401,7 @@ public class Enemy : MonoBehaviour
     Transform visualRoot;
     SpriteRenderer sr;
     Animator anim;
+    DirectionalVisual directionalVisual;
     Vector3 prefabVisualScale = Vector3.one;
     Vector3 baseVisualScale = Vector3.one;
     Color prefabBaseColor = Color.white;
@@ -415,6 +420,8 @@ public class Enemy : MonoBehaviour
         sr = foundVisual != null ? foundVisual.GetComponent<SpriteRenderer>() : GetComponentInChildren<SpriteRenderer>();
         visualRoot = foundVisual != null ? foundVisual : (sr != null ? sr.transform : transform);
         anim = visualRoot != null ? visualRoot.GetComponent<Animator>() : null;
+        directionalVisual = visualRoot != null ? visualRoot.GetComponent<DirectionalVisual>() : null;
+        if (directionalVisual != null) directionalVisual.EnsureInitialized();
 
         if (visualRoot != null)
         {
@@ -461,11 +468,27 @@ public class Enemy : MonoBehaviour
     {
         if (sr == null || data == null) return;
 
-        if (data.customSprite != null)
+        bool hasDirectional = directionalVisual != null && directionalVisual.HasAllDirections;
+        if (!hasDirectional && directionalVisual != null && data.directionalSprites != null && data.directionalSprites.Length >= 8)
+        {
+            directionalVisual.SetSprites(data.directionalSprites);
+            hasDirectional = directionalVisual.HasAllDirections;
+        }
+
+        if (hasDirectional)
+        {
+            baseColor = prefabBaseColor;
+            baseVisualScale = prefabVisualScale;
+            EnsureUnlitSpriteMaterial();
+            if (anim != null) anim.enabled = data.animatorController != null;
+            directionalVisual.ResetVisual();
+        }
+        else if (data.customSprite != null)
         {
             sr.sprite = data.customSprite;
             baseColor = prefabBaseColor;
             baseVisualScale = prefabVisualScale;
+            EnsureUnlitSpriteMaterial();
 
             if (data.animatorController != null)
             {
@@ -487,12 +510,7 @@ public class Enemy : MonoBehaviour
         else
         {
             sr.sprite = EnemyVisuals.GetSprite(data.visualType);
-            if (sr.sharedMaterial == null || sr.sharedMaterial.shader == null ||
-                sr.sharedMaterial.shader.name != "Universal Render Pipeline/2D/Sprite-Unlit-Default")
-            {
-                Material unlit = EnemyVisuals.GetUnlitMaterial();
-                if (unlit != null) sr.sharedMaterial = unlit;
-            }
+            EnsureUnlitSpriteMaterial();
 
             baseColor = Color.white;
             baseVisualScale = Vector3.one * Mathf.Max(0.1f, data.visualSize);
@@ -500,10 +518,20 @@ public class Enemy : MonoBehaviour
         }
 
         sr.color = baseColor;
-        sr.flipX = false;
+        if (!hasDirectional) sr.flipX = false;
         if (visualRoot != null && visualRoot != transform)
         {
             visualRoot.localScale = baseVisualScale;
+        }
+    }
+
+    void EnsureUnlitSpriteMaterial()
+    {
+        if (sr.sharedMaterial == null || sr.sharedMaterial.shader == null ||
+            sr.sharedMaterial.shader.name != "Universal Render Pipeline/2D/Sprite-Unlit-Default")
+        {
+            Material unlit = EnemyVisuals.GetUnlitMaterial();
+            if (unlit != null) sr.sharedMaterial = unlit;
         }
     }
 
@@ -566,6 +594,10 @@ public class Enemy : MonoBehaviour
         {
             sr.color = baseColor;
             sr.flipX = false;
+        }
+        if (directionalVisual != null)
+        {
+            directionalVisual.ResetVisual();
         }
         if (visualRoot != null && visualRoot != transform)
         {

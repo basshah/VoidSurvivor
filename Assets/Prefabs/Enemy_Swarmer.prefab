@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5692018977582243759}
   - component: {fileID: 2978947736883742322}
+  - component: {fileID: 2144977147218566625}
   m_Layer: 0
   m_Name: VisualRoot
   m_TagString: Untagged
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b6acf297fff133340902c0173ec2aeb6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,8 +90,34 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2144977147218566625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2492400324546087175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb6c1ace9d3d2d498ff30892810d110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalVisual
+  sprites:
+  - {fileID: 21300000, guid: 59e36e2f1dc3c6e4fbb81672571b1deb, type: 3}
+  - {fileID: 21300000, guid: 6599a027848ab8040a4b1d14e94d1472, type: 3}
+  - {fileID: 21300000, guid: fb26db0010794c64baacc105ba91471a, type: 3}
+  - {fileID: 21300000, guid: 0ac76c584aa2083458d489e57f48f7b3, type: 3}
+  - {fileID: 21300000, guid: ee8c58b99c97d82448af6a8061680b58, type: 3}
+  - {fileID: 21300000, guid: c36d864ffaf5e3d43b089efc384f7f9c, type: 3}
+  - {fileID: 21300000, guid: b6acf297fff133340902c0173ec2aeb6, type: 3}
+  - {fileID: 21300000, guid: a32ca21128c20a04fb58ce920b8cba34, type: 3}
+  enableHover: 1
+  hoverAmplitude: 0.055
+  hoverFrequency: 2.6
+  maxTiltDegrees: 7
+  tiltSpeed: 10
 --- !u!1 &9144295730057149962
 GameObject:
   m_ObjectHideFlags: 0

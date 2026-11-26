@@ -22,5 +22,14 @@ MonoBehaviour:
   hitRadiusRatio: 0.39
   knockbackResistance: 0.25
   deathVfxColor: {r: 0.95, g: 0.25, b: 0.38, a: 1}
-  customSprite: {fileID: 0}
+  customSprite: {fileID: 21300000, guid: 070ad865d6218ab4a854b7ac6294292c, type: 3}
+  directionalSprites:
+  - {fileID: 21300000, guid: 25c25dde3a6223142964fc00dae51c1a, type: 3}
+  - {fileID: 21300000, guid: 582653b101e24dd4eb98d205baace217, type: 3}
+  - {fileID: 21300000, guid: e97b94dcfc1151448ba1cbce31b8df81, type: 3}
+  - {fileID: 21300000, guid: 8612c556aae285c438e756d6b96e5d27, type: 3}
+  - {fileID: 21300000, guid: 4a92eb759eb36ab40af1b3ff583a2085, type: 3}
+  - {fileID: 21300000, guid: 3ff9eae233ab0d842b7139b218093f26, type: 3}
+  - {fileID: 21300000, guid: 070ad865d6218ab4a854b7ac6294292c, type: 3}
+  - {fileID: 21300000, guid: 7b78b73bb9898344894d7eeabb7fc471, type: 3}
   animatorController: {fileID: 0}

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 793932189630452013}
   - component: {fileID: 8564282795894880716}
+  - component: {fileID: 2526388406093222259}
   m_Layer: 0
   m_Name: VisualRoot
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 639626189538258845}
@@ -81,16 +82,42 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6e8b9c0eb569d33448cb4f9bf0cb7abb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.0625, y: 1.0625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2526388406093222259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2894831742898244286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb6c1ace9d3d2d498ff30892810d110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DirectionalVisual
+  sprites:
+  - {fileID: 21300000, guid: 8e8291258885d63429a3eb7308343533, type: 3}
+  - {fileID: 21300000, guid: 9666faac6f4125e42ba8221c272c032e, type: 3}
+  - {fileID: 21300000, guid: 15c746eaaa5f6ec4aa939041ecded212, type: 3}
+  - {fileID: 21300000, guid: 59354594750868748b7676057a27d302, type: 3}
+  - {fileID: 21300000, guid: c04e8c6597376a041b1f196385416765, type: 3}
+  - {fileID: 21300000, guid: 31f9bcef43d8c624789707fbdfc5c121, type: 3}
+  - {fileID: 21300000, guid: 6e8b9c0eb569d33448cb4f9bf0cb7abb, type: 3}
+  - {fileID: 21300000, guid: 6318f7799f806a54bb88f8a3ad56e704, type: 3}
+  enableHover: 1
+  hoverAmplitude: 0.055
+  hoverFrequency: 2.6
+  maxTiltDegrees: 7
+  tiltSpeed: 10
 --- !u!1 &8911179773579911295
 GameObject:
   m_ObjectHideFlags: 0

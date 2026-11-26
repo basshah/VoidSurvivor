@@ -435,16 +435,10 @@ public static class UIBuilder
         rt.anchorMax = new Vector2(Mathf.Clamp01(v), 1f);
     }
 
-    // Assets içində hər yerdə <ad>.png (Sprite tipli) axtarır
+    // Assets/Art/Icons (və ya Assets) içində <ad>.png (Sprite tipli) axtarır
     static Sprite FindSprite(string name)
     {
-        foreach (var guid in AssetDatabase.FindAssets(name + " t:Sprite", new[] { "Assets" }))
-        {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            if (Path.GetFileNameWithoutExtension(path) == name)
-                return AssetDatabase.LoadAssetAtPath<Sprite>(path);
-        }
-        return null;
+        return ArtSetup.FindIconSprite(name);
     }
 
     static Image Icon(string name, Transform parent, Color fallback)
